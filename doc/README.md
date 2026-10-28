@@ -183,6 +183,6 @@ node --run verify
 - 不执行脚本、外部实体或 DOCTYPE；不支持的内容拒绝读取，防止无提示损失。
 - 批处理遇错仍继续后续行，最终返回退出码 1；交互会话可继续使用。EOF 退出，不额外添加题目外的退出命令。
 
-### Git 提交与截止要求
+### 目标仓库
 
-开发过程通过独立提交记录，最终提交打 `final` 标签，目标仓库为 <https://github.com/ooooomelodyoooo/lab1>。仓库是否成功推送以实际远程查询为准，不以本地文档声明代替。课程截止时间未提供，无法独立核实截止条件。
+<https://github.com/ooooomelodyoooo/lab1>
