@@ -24,6 +24,9 @@ export abstract class Container extends SvgShape {
   override scale(factor: number): void {
     Validation.positive(factor, 'scale factor'); this.nodes.forEach(child => child.scale(factor));
   }
+  override normalizeTransform(factor: number, dx: number, dy: number): void {
+    this.nodes.forEach(child => child.normalizeTransform(factor, dx, dy));
+  }
   override configure(args: readonly string[]): void { Validation.count(args, 0); }
   override describe(): string { return `${this.label}${this.paintSummary() ? ` ${this.paintSummary()}` : ''}`; }
   protected copyChildrenTo(target: Container): void {

@@ -9,8 +9,7 @@ export abstract class SvgShape {
   // Presentation attributes preserved on import; editing still uses the assignment's whitelist.
   private static readonly preservedKeys = new Set([
     'font-size', 'font-family', 'font-weight', 'text-anchor', 'dominant-baseline',
-    'opacity', 'fill-opacity', 'stroke-opacity', 'stroke-linecap', 'stroke-linejoin',
-    'stroke-dasharray', 'rx', 'ry', 'visibility', 'display', 'data-kind',
+    'data-kind',
   ]);
   private readonly identifier: string;
   constructor(identifier: string) { Validation.text(identifier); this.identifier = identifier; }
@@ -24,6 +23,9 @@ export abstract class SvgShape {
   contains(other: SvgShape): boolean { return this === other; }
   abstract move(dx: number, dy: number): void;
   abstract scale(factor: number): void;
+  normalizeTransform(factor: number, dx: number, dy: number): void {
+    this.scale(factor); this.move(dx, dy);
+  }
   abstract clone(): SvgShape;
   abstract describe(): string;
   abstract configure(args: readonly string[]): void;
@@ -50,6 +52,20 @@ export abstract class SvgShape {
   protected copyPresentation(target: SvgShape): void {
     for (const [key, value] of this.styles) target.styles.set(key, value);
     for (const [key, value] of this.extra) target.extra.set(key, value);
+  }
+  inheritPresentation(source: SvgShape): void {
+    const own = this.attributes();
+    for (const [key, value] of source.attributes()) {
+      if (!own.has(key) && (SvgShape.styleKeys.has(key) ||
+          (SvgShape.preservedKeys.has(key) && key !== 'data-kind'))) this.importPresentation(key, value);
+    }
+  }
+  protected presentation(key: string, fallback: string): string {
+    return this.attributes().get(key) ?? this.parent?.presentation(key, fallback) ?? fallback;
+  }
+  protected importPresentation(key: string, value: string): void {
+    if (SvgShape.styleKeys.has(key)) this.set(key, value);
+    else this.extra.set(key, Validation.text(value));
   }
   protected paintSummary(): string {
     return [...this.styles].map(([key, value]) => `${key}=${value}`).join(' ');

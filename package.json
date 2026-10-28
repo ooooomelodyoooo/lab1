@@ -4,14 +4,22 @@
   "private": true,
   "description": "Lab1 Phase 1 — object-oriented SVG editor",
   "type": "module",
-  "engines": { "node": ">=22.18" },
+  "engines": {
+    "node": ">=22.18"
+  },
   "scripts": {
     "cli": "node --experimental-strip-types src/cli/Main.ts",
     "build": "tsc",
-    "check": "tsc --noEmit && node scripts/check-architecture.mjs",
+    "check": "tsc -p tsconfig.test.json && node scripts/check-architecture.mjs",
     "test": "node --experimental-strip-types --test test/*.test.ts",
-    "verify": "npm run check && npm test && npm run build"
+    "verify": "node --run check && node --run test && node --run build"
   },
-  "dependencies": { "saxes": "6.0.0" },
-  "devDependencies": { "@types/node": "^24.0.0", "typescript": "~5.9.3" }
+  "dependencies": {
+    "saxes": "6.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "24.19.2",
+    "typescript": "5.9.3"
+  },
+  "packageManager": "pnpm@11.25.0"
 }

@@ -66,12 +66,7 @@ export class SvgDocument {
     if (group.parent === this.root) throw new Error(`cannot ungroup top-level container: ${id}`);
     const parent = group.parent!; const index = parent.children.indexOf(group);
     // Preserve inherited presentation after removing the wrapper.
-    for (const child of group.children) {
-      const own = child.attributes();
-      for (const [key, value] of group.attributes()) {
-        if (['fill', 'stroke', 'stroke-width'].includes(key) && !own.has(key)) child.set(key, value);
-      }
-    }
+    for (const child of group.children) child.inheritPresentation(group);
     const children = group.children;
     parent.remove(group); children.forEach((child, offset) => parent.insert(child, index + offset));
   }

@@ -62,7 +62,7 @@ export class SvgCodec {
   private transform(shape: SvgShape, value: string | undefined): void {
     if (value === undefined) return;
     const transform = UniformTransform.parse(value);
-    shape.scale(transform.factor); shape.move(transform.dx, transform.dy);
+    shape.normalizeTransform(transform.factor, transform.dx, transform.dy);
   }
   private dimension(value: string | undefined, fallback: number, name: string): number {
     return value === undefined ? fallback : Validation.positive(value.replace(/px$/u, ''), name);

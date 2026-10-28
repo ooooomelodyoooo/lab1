@@ -24,6 +24,13 @@ export abstract class LeafShape extends SvgShape {
     this.geometry.move(this.vertical, dy);
   }
   override scale(factor: number): void { this.geometry.scale(Validation.positive(factor, 'scale factor')); }
+  override normalizeTransform(factor: number, dx: number, dy: number): void {
+    if (factor !== 1) {
+      const width = this.presentation('stroke-width', '1').replace(/px$/u, '');
+      this.set('stroke-width', String(Validation.nonnegative(width, 'stroke-width') * factor));
+    }
+    super.normalizeTransform(factor, dx, dy);
+  }
   override set(attribute: string, value: string): void {
     if (this.geometry.has(attribute)) this.geometry.set(attribute, value);
     else super.set(attribute, value);

@@ -50,3 +50,17 @@ test('DOCTYPE, invalid root, invalid viewBox and namespaces fail explicitly', ()
   assert.throws(() => codec.decode(svg('', 'viewBox="0 0 200 100"')), /match canvas/);
   assert.throws(() => codec.decode('<svg xmlns="urn:other"/>'), /namespace/);
 });
+
+test('imported transform preserves inherited text sizing and stroke widths', () => {
+  const doc = codec.decode(svg('<g id="g" font-size="20" stroke="black" stroke-width="4" transform="scale(2)"><text id="t" x="2" y="3">A</text><rect id="r" width="4" height="5"/></g>')).document;
+  assert.equal(doc.find('t').attributes().get('font-size'),'40');
+  assert.equal(doc.find('r').attributes().get('stroke-width'),'8');
+  assert.equal(doc.find('t').attributes().get('stroke-width'),'8');
+});
+test('ungroup preserves inherited presentation and explicit child overrides', () => {
+  const doc = codec.decode(svg('<g id="scene"><g id="g" fill="red" font-size="20"><text id="t">A</text><rect id="r" fill="blue"/></g></g>')).document;
+  doc.ungroup('g');
+  assert.equal(doc.find('t').attributes().get('fill'),'red');
+  assert.equal(doc.find('t').attributes().get('font-size'),'20');
+  assert.equal(doc.find('r').attributes().get('fill'),'blue');
+});
