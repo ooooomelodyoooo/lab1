@@ -54,8 +54,6 @@ id 唯一且区分大小写；有空格的文本和路径使用双引号。只�
 
 文档命令 `init/read/save` 及带参数的 `canvas` 成功后清空并锁定 undo/redo，下一次成功编辑解锁；显示命令不干扰历史。根级 `g` 按题目要求拒绝 `ungroup`。`box` 属于后续阶段，本阶段报告未知类型。
 
-## Git 交付
+## 目标仓库
 
-远程目标：<https://github.com/ooooomelodyoooo/lab1>。提交按架构、模型、命令、IO、修订、交付分步保留；完成版本标记为 `final`。本地 Git 使用明确的协作身份 `SVG Lab contributor <svg-lab@localhost>`，未冒用学生的个人姓名或邮箱。
-
-提交截止时间未提供，因此项目只能记录实际提交与标签时间，不能据此断言是否满足课程截止要求。
+<https://github.com/ooooomelodyoooo/lab1>
