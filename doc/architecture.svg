@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="880" height="620" viewBox="0 0 880 620">
+<defs><marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M 0 0 L 10 5 L 0 10 z" fill="#334155"/></marker></defs>
+<rect width="880" height="620" fill="#f8fafc"/>
+<g font-family="Arial, sans-serif" fill="#0f172a">
+<text x="40" y="40" font-size="22" font-weight="bold">SVG CLI — component dependencies</text>
+<g stroke="#94a3b8" stroke-width="1.5">
+<rect x="45" y="85" width="310" height="160" rx="8" fill="#dbeafe"/>
+<rect x="490" y="85" width="345" height="195" rx="8" fill="#e0e7ff"/>
+<rect x="45" y="365" width="310" height="165" rx="8" fill="#fef3c7"/>
+<rect x="490" y="365" width="345" height="165" rx="8" fill="#dcfce7"/>
+</g>
+<g font-size="16">
+<text x="65" y="115" font-weight="bold">«component» cli</text><text x="65" y="150">Main / Repl</text><text x="65" y="182">Lexer / Cli / CommandRegistry</text><text x="65" y="214" font-size="13">Interaction and composition root</text>
+<text x="510" y="115" font-weight="bold">«component» application</text><text x="510" y="150">Command / EditCommand</text><text x="510" y="182">Editor / History / TreeRenderer</text><text x="510" y="214">«interface» DocumentStore</text><text x="510" y="250" font-size="13">Use cases, transactions and history</text>
+<text x="65" y="395" font-weight="bold">«component» infrastructure</text><text x="65" y="430">NodeSvgStore</text><text x="65" y="462">SvgCodec / XmlParser</text><text x="65" y="494">UniformTransform</text>
+<text x="510" y="395" font-weight="bold">«component» domain</text><text x="510" y="430">SvgDocument / Canvas</text><text x="510" y="462">SvgShape / LeafShape / Container</text><text x="510" y="494">Six shapes / ShapeFactory</text>
+</g>
+<g fill="none" stroke="#334155" stroke-width="2" marker-end="url(#a)">
+<path d="M355 150 H485"/><path d="M662 280 V360"/><path d="M355 445 H485"/>
+<path d="M355 395 L450 395 L450 215 H485" stroke-dasharray="6 5"/>
+<path d="M160 245 V360" stroke-dasharray="6 5"/>
+</g>
+<g font-size="12"><text x="378" y="138">uses</text><text x="674" y="325">uses</text><text x="380" y="433">uses</text><text x="365" y="304">implements port</text><text x="170" y="302">Main wires adapter</text><text x="45" y="580">Solid arrows: allowed dependencies. Dashed arrows: port implementation / composition.</text></g>
+</g></svg>

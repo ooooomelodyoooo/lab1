@@ -1,0 +1,33 @@
+@startuml
+left to right direction
+skinparam componentStyle uml2
+package "src/cli" {
+  [Main / Repl]
+  [Lexer / Cli / CommandRegistry]
+}
+package "src/application" {
+  [Command / EditCommand]
+  [Editor / History / TreeRenderer]
+  interface DocumentStore
+}
+package "src/domain" {
+  [SvgDocument / Canvas]
+  [SvgShape / LeafShape / Container]
+  [Six shapes / ShapeFactory]
+}
+package "src/infrastructure" {
+  [NodeSvgStore]
+  [SvgCodec / XmlParser / UniformTransform]
+}
+[Main / Repl] --> [Lexer / Cli / CommandRegistry]
+[Lexer / Cli / CommandRegistry] --> [Command / EditCommand]
+[Command / EditCommand] --> [Editor / History / TreeRenderer]
+[Editor / History / TreeRenderer] --> [SvgDocument / Canvas]
+[Editor / History / TreeRenderer] --> DocumentStore
+[SvgDocument / Canvas] --> [SvgShape / LeafShape / Container]
+[Six shapes / ShapeFactory] --> [SvgShape / LeafShape / Container]
+[NodeSvgStore] ..|> DocumentStore
+[NodeSvgStore] --> [SvgCodec / XmlParser / UniformTransform]
+[SvgCodec / XmlParser / UniformTransform] --> [Six shapes / ShapeFactory]
+[Main / Repl] ..> [NodeSvgStore] : Main composition root only
+@enduml
